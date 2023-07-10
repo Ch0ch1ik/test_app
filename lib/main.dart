@@ -51,8 +51,23 @@ class _MyAppState extends State<MyApp> {
             future: futureQuestionnaire,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                
-                return Text(snapshot.data!.name?? 'nazwa');
+                var utf8Name = snapshot.data!.name!.runes.toList();
+                var utf8Description = snapshot.data!.description!.runes.toList();
+                return
+                 Column(
+                  children:  [
+                    Text(utf8.decode(utf8Name)),
+                    Text(utf8.decode(utf8Description)),
+                    const Text('AAAAAAAA'),
+                    const Expanded(
+                      child: FittedBox(
+                        child: FlutterLogo(),
+                      ),
+                    ),
+                  ],
+                );
+
+
 
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');
